@@ -1,0 +1,1 @@
+CREATE INDEX idx_class_id ON student (class_id);
