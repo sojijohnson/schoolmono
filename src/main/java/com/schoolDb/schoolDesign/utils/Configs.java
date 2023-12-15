@@ -55,6 +55,7 @@ private CustomerUsersDetailsService customerUsersDetailsService;
                         .requestMatchers("/supervisor/**").permitAll()
                         .requestMatchers("/classroom/**").permitAll()
                         .requestMatchers("/grade/**").permitAll()
+                        .requestMatchers("/dashboard/**").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults());
                // .requestMatchers("/supervisor/**","student/*","/supervisor/register").permitAll()

@@ -16,12 +16,12 @@ public class GradeWrapper {
     private Date gradeDate;
 
 
-    private Student student;
+    private Long student;
 
 
-    private Course courses;
+    private Long courses;
 
-    public GradeWrapper( String gradeValue, Student student, Course courses) {
+    public GradeWrapper( String gradeValue, Long student, Long courses) {
        // this.id = id;
         this.gradeValue = gradeValue;
       //  this.gradeDate = gradeDate;

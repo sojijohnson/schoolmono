@@ -3,8 +3,10 @@ package com.schoolDb.schoolDesign.service;
 import com.schoolDb.schoolDesign.DTO.CourseDTO;
 import com.schoolDb.schoolDesign.DTO.StudentDTO;
 import com.schoolDb.schoolDesign.model.Course;
+import com.schoolDb.schoolDesign.model.Parent;
 import com.schoolDb.schoolDesign.model.Student;
 import com.schoolDb.schoolDesign.repo.CourseRepo;
+import com.schoolDb.schoolDesign.repo.ParentRepo;
 import com.schoolDb.schoolDesign.repo.StudentRepo;
 import com.schoolDb.schoolDesign.wrapper.StudentWrapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +27,23 @@ public class StudentService {
     @Autowired
     private StudentRepo studentRepo;
     private CourseRepo courseRepo;
+    @Autowired
+    private ParentRepo parentRepo;
+
+    public ResponseEntity<String> registerParent(Parent parent){
+        Parent p = new Parent();
+
+        p.setAddress(parent.getAddress());
+       // p.setStudent(parent.getStudent());
+        p.setPhone(parent.getPhone());
+        p.setFirstName(parent.getFirstName());
+        p.setLastName(parent.getLastName());
+
+        parentRepo.save(p);
+
+        return new ResponseEntity<>("parent saved",HttpStatus.OK);
+
+    }
     public ResponseEntity<String> registerStudent(Student registerstudent) {
 
  try {
@@ -78,9 +97,9 @@ public class StudentService {
     public StudentDTO findStudent(Long id) {
         try{
 
+           // StudentDTO student=  studentService.findStudent(studentId)
 
-
-         //Optional<Student> stu  =   studentRepo.findById(id);
+            //Optional<Student> stu  =   studentRepo.findById(id);
                   Student  stu =  studentRepo.getById(id);
           return   studentToDTO(stu);
         }catch (Exception ex){

@@ -7,6 +7,7 @@ import com.schoolDb.schoolDesign.model.Grade;
 import com.schoolDb.schoolDesign.model.Recordd;
 import com.schoolDb.schoolDesign.repo.GradeRepo;
 import com.schoolDb.schoolDesign.repo.RecordRepo;
+import com.schoolDb.schoolDesign.wrapper.GradeWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class GradeService {
@@ -91,11 +93,23 @@ return new ResponseEntity<>("saved", HttpStatus.OK);
     }
     public ResponseEntity<List<GradeDTO>> findGradeById(Long studentId){
 
-                     List<GradeDTO> grades=   gradeRepo.findByStudentId(studentId);
+                    // List<GradeDTO> grades=   gradeRepo.findByStudentId(studentId);
+        List<GradeWrapper> grades=   gradeRepo.findByStudentId(studentId);
+           // List g=  grades.stream().map(grade->grades).toList();
+                         List g=  grades.stream().map(this::gradeDtoToWrapper).toList();
 
-              GradeDTO g= (GradeDTO) grades.stream().map(grade->grades).toList();
-                System.out.println(g);
-        return new ResponseEntity<>(grades,HttpStatus.OK);
+        List<GradeWrapper>gradeWrappers = new ArrayList<>();
+
+              //  System.out.println(g);
+        return new ResponseEntity<>(g,HttpStatus.OK);
+    }
+
+    public GradeDTO gradeDtoToWrapper(GradeWrapper gradeWrapper){
+        GradeDTO gradeDTO =new GradeDTO();
+        gradeDTO.setGradeValue(gradeWrapper.getGradeValue());
+        gradeDTO.setStudent(gradeWrapper.getStudent());
+        gradeDTO.setCourses(gradeWrapper.getCourses());
+        return gradeDTO;
     }
 }
 

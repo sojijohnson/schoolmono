@@ -66,6 +66,8 @@ private List<Recordd> recordd;
 
     //@NonNull
     private  String phone;
+    @ManyToOne()
+    private Parent parent;
 
 public Student(Long studentId,String firstname){
 

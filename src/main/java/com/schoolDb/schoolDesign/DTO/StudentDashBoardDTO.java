@@ -4,6 +4,7 @@ import com.schoolDb.schoolDesign.model.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -12,10 +13,10 @@ import java.util.List;
 
 public class StudentDashBoardDTO {
 
-    private Student student;
-    private List<GradeDTO> grades;
+    private StudentDTO student;
+    private ResponseEntity<List<GradeDTO>> grades;
 
-    public StudentDashBoardDTO(Student student, List<GradeDTO> grades) {
+    public StudentDashBoardDTO(StudentDTO student, ResponseEntity<List<GradeDTO>> grades) {
         this.student = student;
         this.grades = grades;
     }

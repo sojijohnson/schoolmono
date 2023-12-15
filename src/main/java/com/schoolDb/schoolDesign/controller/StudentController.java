@@ -25,6 +25,12 @@ public class StudentController {
         return  studentService.registerStudent(registerstudent);
 
     }
+    @PostMapping("/registerStudent")
+    public ResponseEntity<String> parentStudent(@RequestBody() Student parent){
+
+        return  studentService.registerStudent(parent);
+
+    }
 
 
     @DeleteMapping("deleteall")
@@ -36,7 +42,9 @@ public class StudentController {
       @GetMapping("/findstudent")
     public ResponseEntity<StudentDTO> findStudent(@RequestParam(value ="id") Long id){
         return new ResponseEntity<>(studentService.findStudent(id),HttpStatus.OK);
-    }
+
+         // StudentDTO student=  studentService.findStudent(studentId)
+      }
 
 
 
